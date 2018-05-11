@@ -1,11 +1,11 @@
-import options from './options'
+// import options from './options'
 import { resolveName } from '../services/resolver'
 
 function resolve (type) {
   return resolveName(type, 'value')
 }
 
-export default function debug () {
+export default function debug (options) {
   console.log(`
   [Vuex Pathify] Options:
 

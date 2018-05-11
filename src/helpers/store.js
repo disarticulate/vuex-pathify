@@ -22,7 +22,7 @@ function getStateKeys (state) {
 export function makeGetters (state) {
   return getStateKeys(state)
     .reduce(function (obj, key) {
-      const getter = resolveName('getters', key)
+      const getter = resolveName('getters', key, options)
       obj[getter] = function (state) {
         return state[key]
       }
@@ -38,7 +38,7 @@ export function makeGetters (state) {
 export function makeMutations (state) {
   return getStateKeys(state)
     .reduce(function (obj, key) {
-      const mutation = resolveName('mutations', key)
+      const mutation = resolveName('mutations', key, options)
       obj[mutation] = function (state, value) {
         value instanceof Payload
           ? value.update(state[key])
@@ -56,8 +56,8 @@ export function makeMutations (state) {
 export function makeActions (state) {
   return getStateKeys(state)
     .reduce(function (obj, key) {
-      const action = resolveName('actions', key)
-      const mutation = resolveName('mutations', key)
+      const action = resolveName('actions', key, options)
+      const mutation = resolveName('mutations', key, options)
       obj[action] = function ({commit}, value) {
         commit(mutation, value)
       }

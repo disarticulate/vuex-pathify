@@ -1,5 +1,5 @@
 import { hasValue } from '../utils/object'
-import options from '../plugin/options'
+// import options from '../plugin/options'
 import formatters from './formatters'
 
 /**
@@ -61,7 +61,7 @@ let resolver
  * @param   {string}  name  The supplied path member id, i.e. value
  * @returns {string}        The resolved member name, i.e. SET_VALUE
  */
-export function resolveName (type, name) {
+export function resolveName (type, name, options) {
   // bypass resolver
   if (name.match(/!$/)) {
     return name.substr(0, name.length - 1)
@@ -99,7 +99,7 @@ export function resolveName (type, name) {
  * @param   {string}  path      A pathify path to the store target, i.e. 'foo/bar@a.b.c'
  * @returns {object}
  */
-export function resolve (store, path) {
+export function resolve (store, path, options) {
   // state
   const absPath = path.replace(/[/@!]+/g, '.')
 

@@ -13,8 +13,8 @@ import Payload from '../classes/Payload'
  * @param   {string}  path    The path to the target node
  * @returns {*|Promise}       The return value from the commit() or dispatch()
  */
-export function makeSetter (store, path) {
-  const resolver = resolve(store, path)
+export function makeSetter (store, path, options) {
+  const resolver = resolve(store, path, options)
 
   const action = resolver.get('actions')
   if (action.exists) {
@@ -49,8 +49,8 @@ export function makeSetter (store, path) {
  * @param   {boolean}  [stateOnly]  An optional flag to get from state only (used when syncing)
  * @returns {*|Function}            The state value or getter function
  */
-export function makeGetter (store, path, stateOnly) {
-  const resolver = resolve(store, path)
+export function makeGetter (store, path, stateOnly, options) {
+  const resolver = resolve(store, path, options)
 
   // for sync, we don't want to read only from state
   if (!stateOnly) {

@@ -2,7 +2,7 @@ import cloneDeep from 'lodash.clonedeep'
 import { isObject } from '../utils/object'
 import { makeGetter, makeSetter } from '../services/store'
 
-export default function (store) {
+export default function (store, options) {
 
   /**
    * Set a property on the store, automatically using actions or mutations
@@ -12,7 +12,7 @@ export default function (store) {
    * @returns {Promise|*}             Any return value from the action / commit
    */
   store.set = function (path, value) {
-    const setter = makeSetter(store, path)
+    const setter = makeSetter(store, path, options)
     if (typeof setter !== 'undefined') {
       return setter(value)
     }
@@ -26,7 +26,7 @@ export default function (store) {
    * @returns {*|undefined}           The state value / getter value / getter function / or undefined
    */
   store.get = function (path, ...args) {
-    const getter = makeGetter(store, path)
+    const getter = makeGetter(store, path, options)
     if (typeof getter !== 'undefined') {
       return getter instanceof Function
         ? getter()(...args)
